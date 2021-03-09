@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Лучшие фильмы</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script type='text/babel'>
+    function Header(props) {
+        return (
+            <div className="header">
+                <h1>{props.title}</h1>
+                <div id="nav"></div>
+                <div className="header-img"><img src={props.cover} /></div>
+            </div>
+        );
+    }
+    function Footer(props) {
+        return (
+            <div className="footer">
+                {props.text}
+            </div>
+        );
+    }
+    function Navigation(props) {
+        const content = props.nav.map((post) =>
+            <li key={post.id}>
+                <a href={post.linkHref}>
+                    {post.linktext}
+                </a>
+
+            </li>
+        );
+        return (
+            <ul>
+                {content}
+            </ul>
+        );
+    }
+    const nav = [
+        {id: 1, linktext: 'Главная', linkHref: 'index.html'},
+        {id: 2, linktext: 'О нас', linkHref: 'about.html'},
+        {id: 3, linktext: 'Новости', linkHref: 'news.html'}
+    ];
+
+    function Film(props) {
+        return (
+            <div className="film">
+                <div className="film-cover"><img src={props.cover} /></div>
+                <div className="film-name">{props.name}</div>
+                <div className="film-rating">Год выпуска: {props.year}</div>
+            </div>
+        );
+    }
+
+
+    //films
+    const film1 = document.getElementById('film_1');
+    const film2 = document.getElementById('film_2');
+    const film3 = document.getElementById('film_3');
+    //header
+    const header = document.getElementById('header');
+    //footer
+    const footer = document.getElementById('footer');
+
+    // render
+    ReactDOM.render(<Film name="Властелин колец: Братство Кольца" year="2001" cover="covers/film_1.jpeg" />, film1);
+    ReactDOM.render(<Film name="Хоббит: Нежданное путешествие" year="2012" cover="covers/film_2.jpeg" />, film2);
+    ReactDOM.render(<Film name="Троя" year="2004" cover="covers/film_3.jpg" />, film3);
+    ReactDOM.render(<Header title="Лучшие фильмы" cover="covers/header.jpg"/>, header);
+    ReactDOM.render(<Footer text="2020 Все права защищены."/>, footer);
+    ReactDOM.render(<Navigation nav={nav} />,
+        document.getElementById('nav')
+    );
+
+</script>
+
+<div id="test"></div>
+
+<header id="header"></header>
+
+<div class="films-list">
+    <div class="films-list__item" id="film_1"></div>
+    <div class="films-list__item" id="film_2"></div>
+    <div class="films-list__item" id="film_3"></div>
+</div>
+
+<footer id="footer"></footer>
+
+
+</body>
+</html>
