@@ -1,46 +1,17 @@
 import React from 'react';
-import { render } from 'react-dom';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-class Button extends React.Component {
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-        this.state = { random: 0 };
-    }
-
-    handleClick() {
-        const min = 5;
-        const max = 36;
-        const n = 5;
-        var res = [];
-        while (res.length < n) {
-            let number = Math.floor(Math.random() * (max - min + 1)) + min;
-            if (res.includes(number)) {
-
-            } else {
-                res.push(number)
-            }
-        }
-        const listItems = res.map((number) =>
-            <div className={"numberItem"} key={number.toString()}>
-                {number}
-            </div>
-        );
-        this.setState({ random: listItems });
-    }
-
-    render() {
-        return (
-            <div className="row">
-                <h1 className="text-center">Лотерея 5 из 36</h1>
-                <button className="btn btn-primary" onClick={this.handleClick.bind(this)}>Выбрать числа</button>
-                <div className="card" style={{marginTop:"10px"}}>
-                    <div className="card-block">Ваши числа:<br/> {this.state.random}</div>
-                </div>
-            </div>
-        );
-    }
-}
-
-render(<Button />, document.getElementById('root'));
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
